@@ -68,6 +68,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation(project(":composesync-logic-hub"))
-    implementation("com.github.TimofeyMaryin:droid-forge-release:1.0.6")
 
 }
