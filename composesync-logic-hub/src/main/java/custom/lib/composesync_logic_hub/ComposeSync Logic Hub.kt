@@ -2,6 +2,7 @@ package custom.lib.composesync_logic_hub
 
 import android.app.Application
 import androidx.activity.ComponentActivity
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,7 +13,11 @@ import custom.lib.button_application.ButtonBrushBackground
 import custom.lib.button_application.PosIcon
 import custom.lib.button_application.invertColor
 import custom.lib.droid.droid_craft.DroidForgeMain
-import custom.lib.droid.droid_craft.ShortAppInfo
+
+data class ShortAppInfo(
+    val name: String,
+    @DrawableRes val ic: Int,
+)
 
 class ComposeSyncLogicHub(
     activity: ComponentActivity,
@@ -24,14 +29,17 @@ class ComposeSyncLogicHub(
     private fun execute(
         url: String,
         devKey: String,
-        appShortInfo: ShortAppInfo? = null,
+        appShortInfo: ShortAppInfo,
         currentData: String = ""
     ): DroidForgeMain {
 
         main.apply {
             this.url = url
             this.appsCode = devKey
-            this.applicationShortInformation = appShortInfo
+            this.applicationShortInformation = custom.lib.droid.droid_craft.ShortAppInfo(
+                name = appShortInfo.name,
+                ic = appShortInfo.ic
+            )
             this.currentData = currentData
 
             this.start()
@@ -53,7 +61,7 @@ class ComposeSyncLogicHub(
     fun AppContentText(
         url: String,
         devKey: String,
-        appShortInfo: ShortAppInfo? = null,
+        appShortInfo: ShortAppInfo,
         currentData: String = "",
         content: @Composable () -> Unit
     ) {
